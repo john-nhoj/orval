@@ -519,9 +519,10 @@ const generateQueryRequestFunction = (
 
   return `export const ${operationName} = (\n    ${queryProps} ${optionsArgs} ): Promise<AxiosResponse<${
     response.definition.success || 'unknown'
-  }>> => {${bodyForm}
-    ${isVue(outputClient) ? vueUnRefParams(props) : ''}
-    return axios${
+  }>> => {
+  ${isVue(outputClient) ? vueUnRefParams(props) : ''}
+  ${bodyForm}
+  return axios${
       !isSyntheticDefaultImportsAllowed ? '.default' : ''
     }.${verb}(${options});
   }
